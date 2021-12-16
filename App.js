@@ -6,6 +6,8 @@ import {Ionicons} from '@expo/vector-icons'
 import {Asset,useAssets} from 'expo-asset'
 
 import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import Tabs from './navigation/Tabs';
 
 
 export default function App() {
@@ -17,9 +19,9 @@ export default function App() {
     );
   }else{
     return (
-      <Text>
-          We are done loading
-      </Text>
+      <NavigationContainer>
+        <Tabs/>
+      </NavigationContainer>
     );
   }
   
