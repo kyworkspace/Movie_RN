@@ -5,3 +5,4 @@
 ## Special Things
  - navigator
  - styles
+ - TMDB 사용
