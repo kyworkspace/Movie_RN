@@ -1,9 +1,11 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
+import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
 import Poster from './Poster';
 import Votes from './Votes';
 
-const HMovie=styled.View`
+const HMovie = styled.View`
     padding : 0 30px;
     flex-direction : row;
 `
@@ -21,47 +23,54 @@ const Overview = styled.Text`
     color : gray;
     width : 80%;
 `
-const Release=styled.Text`
+const Release = styled.Text`
     color : gray;
     font-size : 12px;
     margin-vertical : 10px;
 `
 
-interface HMediaProps{
-    posterPath : string;
-    originalTitle : string;
-    overview : string;
-    releaseDate? : string;
-    voteAverage ? : number;
+interface HMediaProps {
+    posterPath: string;
+    originalTitle: string;
+    overview: string;
+    releaseDate?: string;
+    voteAverage?: number;
 
 }
 
-const HMedia : React.FC<HMediaProps>=(
+const HMedia: React.FC<HMediaProps> = (
     { posterPath,
-    originalTitle,
-    overview,
-    releaseDate,
-    voteAverage}) => {
+        originalTitle,
+        overview,
+        releaseDate,
+        voteAverage }) => {
+
+    const navigation = useNavigation();
+    const goToDetail = () => {
+        navigation.navigate("Stack", { screen: "Detail" })
+    }
     return (
-        <HMovie >
-            <Poster path={posterPath} />
-            <HColumn>
-                <Title>
-                    {originalTitle}
-                </Title>
-                <Release>
-                    Coming . {new Date(releaseDate).toLocaleDateString("ko", { month: 'long', day: 'numeric', year: 'numeric' })}
-                </Release>
-                {voteAverage ? <Votes votes={voteAverage}/>:null}
-                <Overview>
-                    {overview !== "" && overview.length > 100 ?
-                        `${overview.slice(0, 100)}...`
-                        :
-                        overview
-                    }
-                </Overview>
-            </HColumn>
-        </HMovie>
+        <TouchableOpacity onPress={goToDetail}>
+            <HMovie >
+                <Poster path={posterPath} />
+                <HColumn>
+                    <Title>
+                        {originalTitle}
+                    </Title>
+                    <Release>
+                        Coming . {new Date(releaseDate).toLocaleDateString("ko", { month: 'long', day: 'numeric', year: 'numeric' })}
+                    </Release>
+                    {voteAverage ? <Votes votes={voteAverage} /> : null}
+                    <Overview>
+                        {overview !== "" && overview.length > 100 ?
+                            `${overview.slice(0, 100)}...`
+                            :
+                            overview
+                        }
+                    </Overview>
+                </HColumn>
+            </HMovie>
+        </TouchableOpacity>
     )
 }
 
