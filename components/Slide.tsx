@@ -3,6 +3,7 @@ import { BlurView } from 'expo-blur';
 import React from 'react';
 import { StyleSheet, TouchableOpacity, TouchableWithoutFeedback, useColorScheme, View } from 'react-native';
 import styled from 'styled-components/native';
+import { Movie, TV } from '../api';
 import { makeImgPath } from '../utils';
 import Poster from './Poster';
 
@@ -35,11 +36,12 @@ const Votes = styled(Overview) <{ isDark: boolean }>`
 `;
 
 interface SlideProps {
-    backdropPath: string,
-    posterPath: string,
-    originalTitle: string,
-    voteAverage: number,
-    overview: string
+    backdropPath: string;
+    posterPath: string;
+    originalTitle: string;
+    voteAverage: number;
+    overview: string;
+    fullInfo : Movie|TV;
 }
 
 const Slide: React.FC<SlideProps> = ({
@@ -47,11 +49,13 @@ const Slide: React.FC<SlideProps> = ({
     posterPath,
     originalTitle,
     voteAverage,
-    overview }) => {
+    overview,
+    fullInfo
+    }) => {
     const isDark = useColorScheme() === 'dark';
     const navigation = useNavigation();
     const goToDetail = ()=>{
-        navigation.navigate("Stack",{screen:"Detail"})
+        navigation.navigate("Stack",{screen:"Detail",params : fullInfo})
     }
 
     return (

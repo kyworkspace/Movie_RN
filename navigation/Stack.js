@@ -10,7 +10,7 @@ const Stack =()=>(
     <NativeStack.Navigator screenOptions={{
         animation: 'slide_from_right'
     }}>
-        <NativeStack.Screen name='detail' component={Detail} />
+        <NativeStack.Screen name='Detail' component={Detail} />
     </NativeStack.Navigator>
 )
 

@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
+import { Movie, TV } from '../api';
 import Poster from './Poster';
 import Votes from './Votes';
 
@@ -35,7 +36,7 @@ interface HMediaProps {
     overview: string;
     releaseDate?: string;
     voteAverage?: number;
-
+    fullInfo : Movie|TV;
 }
 
 const HMedia: React.FC<HMediaProps> = (
@@ -43,11 +44,12 @@ const HMedia: React.FC<HMediaProps> = (
         originalTitle,
         overview,
         releaseDate,
-        voteAverage }) => {
+        voteAverage,
+        fullInfo}) => {
 
     const navigation = useNavigation();
     const goToDetail = () => {
-        navigation.navigate("Stack", { screen: "Detail" })
+        navigation.navigate("Stack", { screen: "Detail" ,params : fullInfo})
     }
     return (
         <TouchableOpacity onPress={goToDetail}>
